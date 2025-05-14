@@ -7,12 +7,27 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="container">
-    <h1>My Movie List</h1>
-    <input type="text" id="movieInput" placeholder="Enter movie name" />
-    <button id="addMovieBtn">Add Movie</button>
-    <ul id="movieList"></ul>
-  </div>
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li>BollyWood</li>
+        <li>HollyWood</li>
+        <li>Hindi Dubbed</li>
+        <li>South Hindi</li>
+        <li>Web Series</li>
+        <li>18+</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="title">Latest Movies</h1>
+    <input type="text" id="movieName" placeholder="Movie Name">
+    <input type="text" id="posterUrl" placeholder="Poster Image URL">
+    <button id="addMovie">Add Movie</button>
+    <div id="movieGrid" class="movie-grid"></div>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
