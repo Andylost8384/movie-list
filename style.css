@@ -1,98 +1,13 @@
-
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  color: #fff;
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 30px;
-  justify-content: center;
-}
-
-input, select, button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-}
-
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.movie-card {
-  background-color: #1c1c1c;
-  border-radius: 10px;
-  overflow: hidden;
-  text-align: center;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
-}
-
-.movie-card:hover {
-  transform: scale(1.03);
-}
-
-.movie-card img {
-  width: 180px;
-  height: 270px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.movie-name {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.movie-status {
-  margin-top: 8px;
-  background: #444;
-  color: #fff;
-  border: none;
-  padding: 6px;
-  border-radius: 5px;
-}
-
-.movie-card.watched {
-  border: 2px solid #28a745;
-}
-
 .delete-btn {
-  margin-top: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background-color: #dc3545;
   color: white;
-  font-size: 20px;
+  font-size: 16px;  /* Smaller size */
   border: none;
-  padding: 4px 10px;
-  border-radius: 5px;
+  padding: 4px 8px;  /* Reduced padding for smaller button */
+  border-radius: 50%;  /* Circular shape */
   cursor: pointer;
+  z-index: 10;  /* Ensure it's on top of other elements */
 }
-    
