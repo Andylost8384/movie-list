@@ -7,50 +7,50 @@ let movies = JSON.parse(localStorage.getItem('movies')) || [];
 function renderMovies() {
   list.innerHTML = '';
   movies.forEach((movie, index) => {
-    const li = document.createElement('li');
-    li.className = movie.status.toLowerCase();
+    const card = document.createElement('div');
+    card.className = 'movie-card';
+    if (movie.status === 'Watched') card.classList.add('watched');
 
     const poster = document.createElement('img');
     poster.src = movie.poster;
-    poster.alt = `${movie.name} Poster`;
+    poster.alt = movie.name;
 
     const name = document.createElement('div');
     name.className = 'movie-name';
     name.textContent = movie.name;
 
-    const status = document.createElement('select');
-    status.className = 'status';
-    const options = ['Pending', 'Watched'];
-    options.forEach(opt => {
+    const statusSelect = document.createElement('select');
+    statusSelect.className = 'movie-status';
+    ['Pending', 'Watched'].forEach(status => {
       const option = document.createElement('option');
-      option.value = opt;
-      option.text = opt;
-      if (movie.status === opt) option.selected = true;
-      status.appendChild(option);
+      option.value = status;
+      option.text = status;
+      if (movie.status === status) option.selected = true;
+      statusSelect.appendChild(option);
     });
 
-    status.addEventListener('change', () => {
-      movie.status = status.value;
+    statusSelect.addEventListener('change', () => {
+      movies[index].status = statusSelect.value;
       localStorage.setItem('movies', JSON.stringify(movies));
       renderMovies();
     });
 
-    li.appendChild(poster);
-    li.appendChild(name);
-    li.appendChild(status);
-    list.appendChild(li);
+    card.appendChild(poster);
+    card.appendChild(name);
+    card.appendChild(statusSelect);
+    list.appendChild(card);
   });
 }
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.getElementById('movieName').value;
-  const status = document.getElementById('movieStatus').value;
   const poster = document.getElementById('moviePoster').value;
-  movies.push({ name, status, poster });
+  const status = document.getElementById('movieStatus').value;
+  movies.push({ name, poster, status });
   localStorage.setItem('movies', JSON.stringify(movies));
-  renderMovies();
   form.reset();
+  renderMovies();
 });
 
 renderMovies();
