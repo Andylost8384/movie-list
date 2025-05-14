@@ -6,20 +6,38 @@ let movies = JSON.parse(localStorage.getItem('movies')) || [];
 
 function renderMovies() {
   list.innerHTML = '';
-  movies.forEach((movie) => {
+  movies.forEach((movie, index) => {
     const li = document.createElement('li');
-    li.classList.add(movie.status.toLowerCase());
+    li.className = movie.status.toLowerCase();
 
-    const nameStatus = document.createElement('div');
-    nameStatus.textContent = `${movie.name} - Status: ${movie.status}`;
-    
     const poster = document.createElement('img');
     poster.src = movie.poster;
     poster.alt = `${movie.name} Poster`;
-    poster.style.width = '100px';
+
+    const name = document.createElement('div');
+    name.className = 'movie-name';
+    name.textContent = movie.name;
+
+    const status = document.createElement('select');
+    status.className = 'status';
+    const options = ['Pending', 'Watched'];
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt;
+      option.text = opt;
+      if (movie.status === opt) option.selected = true;
+      status.appendChild(option);
+    });
+
+    status.addEventListener('change', () => {
+      movie.status = status.value;
+      localStorage.setItem('movies', JSON.stringify(movies));
+      renderMovies();
+    });
 
     li.appendChild(poster);
-    li.appendChild(nameStatus);
+    li.appendChild(name);
+    li.appendChild(status);
     list.appendChild(li);
   });
 }
