@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Movie List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>My Movie List</h1>
+    <form id="movieForm">
+      <input type="text" id="movieName" placeholder="Movie name" required />
+      <select id="movieStatus">
+        <option value="Watched">Watched</option>
+        <option value="Pending">Pending</option>
+      </select>
+      <button type="submit">Add Movie</button>
+    </form>
+    <h2>Movies</h2>
+    <ul id="movieList"></ul>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+    
