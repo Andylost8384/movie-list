@@ -8,8 +8,18 @@ function renderMovies() {
   list.innerHTML = '';
   movies.forEach((movie) => {
     const li = document.createElement('li');
-    li.classList.add(movie.status.toLowerCase()); // Add the status as class (e.g., 'watched' or 'pending')
-    li.textContent = `${movie.name} - Status: ${movie.status}`; // Display only status
+    li.classList.add(movie.status.toLowerCase());
+
+    const nameStatus = document.createElement('div');
+    nameStatus.textContent = `${movie.name} - Status: ${movie.status}`;
+    
+    const poster = document.createElement('img');
+    poster.src = movie.poster;
+    poster.alt = `${movie.name} Poster`;
+    poster.style.width = '100px';
+
+    li.appendChild(poster);
+    li.appendChild(nameStatus);
     list.appendChild(li);
   });
 }
@@ -18,7 +28,8 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   const name = document.getElementById('movieName').value;
   const status = document.getElementById('movieStatus').value;
-  movies.push({ name, status });
+  const poster = document.getElementById('moviePoster').value;
+  movies.push({ name, status, poster });
   localStorage.setItem('movies', JSON.stringify(movies));
   renderMovies();
   form.reset();
