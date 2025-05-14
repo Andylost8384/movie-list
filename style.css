@@ -1,13 +1,24 @@
-.delete-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #dc3545;
-  color: white;
-  font-size: 16px;  /* Smaller size */
-  border: none;
-  padding: 4px 8px;  /* Reduced padding for smaller button */
-  border-radius: 50%;  /* Circular shape */
-  cursor: pointer;
-  z-index: 10;  /* Ensure it's on top of other elements */
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+input, button {
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+#movieList {
+  list-style: none;
+  padding: 0;
+}
+#movieList li {
+  padding: 8px;
+  background-color: #eee;
+  margin: 5px 0;
+  border-radius: 4px;
 }
