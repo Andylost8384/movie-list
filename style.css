@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
   padding: 20px;
 }
@@ -41,7 +41,7 @@ button {
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 
@@ -52,10 +52,17 @@ button {
   text-align: center;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
 }
 
 .movie-card img {
-  width: 100%;
+  width: 180px;
+  height: 270px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -76,5 +83,16 @@ button {
 
 .movie-card.watched {
   border: 2px solid #28a745;
+}
+
+.delete-btn {
+  margin-top: 10px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 20px;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
     

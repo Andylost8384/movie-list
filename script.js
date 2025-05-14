@@ -35,9 +35,22 @@ function renderMovies() {
       renderMovies();
     });
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '🗑️';
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.title = "Remove Movie";
+    deleteBtn.addEventListener('click', () => {
+      if (confirm(`Are you sure you want to remove "${movie.name}"?`)) {
+        movies.splice(index, 1);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        renderMovies();
+      }
+    });
+
     card.appendChild(poster);
     card.appendChild(name);
     card.appendChild(statusSelect);
+    card.appendChild(deleteBtn);
     list.appendChild(card);
   });
 }
