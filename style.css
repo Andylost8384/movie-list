@@ -29,5 +29,23 @@ li {
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+li.watched {
+  background-color: #90EE90; /* Light green color for watched movies */
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #ddd;
 }
     
