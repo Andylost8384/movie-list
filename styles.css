@@ -444,6 +444,21 @@ body {
   text-decoration: none;
 }
 
+/* Models page links clean karo */
+.models-grid a {
+  text-decoration: none !important;
+  color: #000 !important;
+}
+
+.models-grid a:visited {
+  color: #000 !important;
+}
+
+/* Hover pe sirf naam underline ho */
+.models-grid a:hover h3 {
+  text-decoration: underline;
+}
+
 .model-thumb img {
   width: 100%;
   height: 240px;
