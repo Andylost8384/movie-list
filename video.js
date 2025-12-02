@@ -1,128 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // --------------- VIDEO DATABASE (FIHAL STATIC) ---------------
 
-  const videos = [
-    {
-      title: "Another Me",
-      model: "Nika Nut",
-      duration: "33:29",
-      thumb: "1.png",
-      // Tumhare diye hue archive.org links:
-      previewUrl: "https://archive.org/download/feelac-1/Preview%20Secret%20Feelings%20Act%201.mp4",
-      fullUrl: "https://archive.org/download/feelac-1/Feelac1.mp4"
-    },
-    {
-      title: "Little Chloe For OnlyTarts Again",
-      model: "Little Chloe",
-      duration: "12:12",
-      thumb: "2.png",
-      previewUrl: "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
-      fullUrl: "https://archive.org/download/ElephantsDream/ed_hd.mp4"
-    },
-    {
-      title: "Thanksgiving Dinner Idea",
-      model: "Mila Pie",
-      duration: "18:58",
-      thumb: "3.png",
-      previewUrl: "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
-      fullUrl: "https://archive.org/download/ElephantsDream/ed_hd.mp4"
-    },
-    {
-      title: "Got Milk?",
-      model: "Little Chloe",
-      duration: "39:37",
-      thumb: "4.png",
-      previewUrl: "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
-      fullUrl: "https://archive.org/download/ElephantsDream/ed_hd.mp4"
-    },
-    {
-      title: "Noi Feja For OnlyTarts",
-      model: "Noi Feja",
-      duration: "16:00",
-      thumb: "5.png",
-      previewUrl: "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
-      fullUrl: "https://archive.org/download/ElephantsDream/ed_hd.mp4"
-    }
-  ];
+  if (!window.VIDEOS) return; // Safety check
 
-  // --------------- URL PARAMS SE VIDEO PICK KARNA ---------------
-
+  // ---- URL se video title read karna ----
   const params = new URLSearchParams(window.location.search);
-  const titleParam = params.get("title"); // video.html?title=Another%20Me
+  const titleParam = params.get("title");
 
-  let currentVideo = null;
+  let currentVideo = window.VIDEOS.find(v => v.title === titleParam);
 
-  if (titleParam) {
-    currentVideo = videos.find(v => v.title === titleParam);
-  }
-
-  // Agar URL me title missing ho ya wrong ho to first video:
+  // Agar URL me kuch galti ho jaye → Latest video dikhao
   if (!currentVideo) {
-    currentVideo = videos[0];
+    currentVideo = [...window.VIDEOS].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    )[0];
   }
 
-  // --------------- DOM ELEMENTS ---------------
-
+  // ---- DOM Elements ----
   const titleEl = document.getElementById("videoTitle");
   const modelEl = document.getElementById("videoModel");
-  const durEl   = document.getElementById("videoDuration");
-  const player  = document.getElementById("videoPlayer");
+  const durationEl = document.getElementById("videoDuration");
+  const playerEl = document.getElementById("videoPlayer");
   const overlay = document.getElementById("upgradeOverlay");
   const relatedGrid = document.getElementById("relatedGrid");
 
-  if (!titleEl || !player || !overlay) {
-    return; // agar video page nahi hai to kuch mat karo
-  }
-
-  // --------------- BASIC PREMIUM LOGIC (PHASE 1) ---------------
-
-  const PREMIUM = false;          // TODO: Firebase se aayega
-  const PREVIEW_TIME = 30;        // seconds (tumne bola 30s)
-  const isPremium = PREMIUM === true;
-
-  // --------------- UI FILL ---------------
-
+  // ---- UI Fill ----
   titleEl.textContent = currentVideo.title;
   modelEl.textContent = currentVideo.model;
-  durEl.textContent   = currentVideo.duration;
+  durationEl.textContent = currentVideo.duration;
 
-  // Stream URL set (preview / full)
-  const streamUrl = isPremium ? currentVideo.fullUrl : currentVideo.previewUrl;
+  // ---- Premium Logic (Phase 1 — no login yet) ----
+  const PREMIUM = false; // TODO: Firebase Auth se set hoga
+  const PREVIEW_TIME = 30; // seconds
 
-  player.src = streamUrl;
+  const sourceUrl = PREMIUM ? currentVideo.fullUrl : currentVideo.previewUrl;
+  playerEl.src = sourceUrl;
 
-  if (!isPremium) {
-    overlay.style.display = "none"; // start me hidden, 30s ke baad dikhayenge
-
-    player.addEventListener("timeupdate", () => {
-      if (player.currentTime >= PREVIEW_TIME) {
-        player.pause();
+  if (!PREMIUM) {
+    overlay.style.display = "none"; // start me hidden
+    playerEl.addEventListener("timeupdate", () => {
+      if (playerEl.currentTime >= PREVIEW_TIME) {
+        playerEl.pause();
         overlay.style.display = "flex";
       }
     });
   } else {
-    // Premium user
     overlay.style.display = "none";
   }
 
-  // --------------- RELATED VIDEOS (same model pe based) ---------------
-
+  // ---- Related Videos Logic ----
   if (relatedGrid) {
-    // Same model ke videos (current ko chhodke)
-    const related = videos.filter(
-      v => v.model === currentVideo.model && v.title !== currentVideo.title
-    );
-
-    // Agar same model ke kam ho to aur random bhar do
-    let extras = videos.filter(v => v.title !== currentVideo.title);
-    while (related.length < 3 && extras.length > 0) {
-      const v = extras.shift();
-      if (!related.includes(v)) related.push(v);
-    }
-
     relatedGrid.innerHTML = "";
 
-    related.forEach(v => {
+    // Same category + same model preference
+    let related = window.VIDEOS.filter(
+      v => v.title !== currentVideo.title
+    );
+
+    // Sort by latest first
+    related = related.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    // Top 3 related hi dikhayenge
+    related.slice(0, 3).forEach(v => {
       const a = document.createElement("a");
       a.href = "video.html?title=" + encodeURIComponent(v.title);
       a.className = "related-card";
@@ -135,4 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       relatedGrid.appendChild(a);
     });
   }
+
+  // Disable Right-Click on video
+  playerEl.addEventListener("contextmenu", e => e.preventDefault());
 });
