@@ -1,5 +1,5 @@
 // videosData.js
-// Saare videos ka central data — yahi edit karna hota rahega
+// Saare videos ka central data — Yahi edit karte rahoge
 
 window.VIDEOS = [
   {
