@@ -231,6 +231,76 @@ body {
   display: inline-block;
 }
 
+/* VIDEO PAGE */
+.video-player {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.video-player video {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  background: #000;
+}
+
+.upgrade-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.upgrade-overlay p {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.upgrade-btn {
+  display: inline-block;
+  background: #2fc4bf;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: #012;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.related-heading {
+  margin-top: 40px;
+  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.related-grid {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 14px;
+}
+
+.related-card {
+  min-width: 200px;
+  text-decoration: none;
+  color: #000;
+}
+
+.related-card img {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
 /* WELCOME SECTION */
 .welcome {
   padding: 80px 0;
