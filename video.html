@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Watch — Infectaria</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Topbar -->
+<header class="topbar">
+  <div class="container">
+    <div class="brand">Infectaria</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="#">All Sites</a>
+      <button id="searchBtn" class="icon">🔍</button>
+      <a href="#" class="login">Login</a>
+      <a href="#" class="cta">Get Access</a>
+    </nav>
+  </div>
+</header>
+
+<main style="padding-top:90px;">
+  <section class="container video-page">
+
+    <!-- Title + Model -->
+    <h1 id="videoTitle">Another Me</h1>
+    <div class="video-meta">
+      <span id="videoModel">Nika Nut</span> •
+      <span id="videoDuration">33:29</span> •
+      <span>4K</span>
+    </div>
+
+    <!-- Video Player -->
+    <div class="video-player">
+      <video id="videoPlayer" controls controlsList="nodownload"
+        disablePictureInPicture preload="metadata">
+        <source id="videoSrc" src="preview.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Overlay for non-premium -->
+      <div id="upgradeOverlay" class="upgrade-overlay">
+        <div>
+          <p>Premium Required to Unlock Full Video</p>
+          <a href="#" class="upgrade-btn">Get Premium</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Videos -->
+    <h3 class="related-heading">Related Videos</h3>
+    <div class="related-grid">
+      <a href="video.html" class="related-card">
+        <img src="3.png" alt="">
+        <p>Thanksgiving Dinner Idea</p>
+      </a>
+      <a href="video.html" class="related-card">
+        <img src="4.png" alt="">
+        <p>Got Milk?</p>
+      </a>
+      <a href="video.html" class="related-card">
+        <img src="5.png" alt="">
+        <p>Noi Feja For OnlyTarts</p>
+      </a>
+    </div>
+
+  </section>
+
+  <footer class="container footer">
+    <div class="links">
+      <a href="#">Support</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+    <div id="yearFooter" class="small"></div>
+  </footer>
+</main>
+
+<!-- Age Gate -->
+<div id="ageGate" class="agegate">
+  <div class="agebox">
+    <h3>18+ Warning</h3>
+    <p>This content is for adults only.</p>
+    <div class="age-actions">
+      <button id="over18" class="btn green">I'm over 18</button>
+      <button id="under18" class="btn red">I'm under 18</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="video.js"></script>
+</body>
+</html>
