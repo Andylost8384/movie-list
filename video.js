@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   durationEl.textContent = currentVideo.duration;
 
   // ---- Premium Logic (Phase 1 — no login yet) ----
-  const PREMIUM = false; // TODO: Firebase Auth se set hoga
+  const PREMIUM = localStorage.getItem("infectaria_premium") === "true"; // TODO: Firebase Auth se set hoga
   const PREVIEW_TIME = 30; // seconds
 
   const sourceUrl = PREMIUM ? currentVideo.fullUrl : currentVideo.previewUrl;
