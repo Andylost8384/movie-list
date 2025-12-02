@@ -437,6 +437,11 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: #000;
+}
+.model-card h3 {
+  text-decoration: none;
 }
 
 .model-thumb img {
