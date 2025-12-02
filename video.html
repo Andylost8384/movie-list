@@ -15,7 +15,7 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="models.html">Models</a>
-      <a href="#">All Sites</a>
+      <a href="videos.html">Videos</a>
       <button id="searchBtn" class="icon">🔍</button>
       <a href="#" class="login">Login</a>
       <a href="#" class="cta">Get Access</a>
@@ -26,19 +26,23 @@
 <main style="padding-top:90px;">
   <section class="container video-page">
 
-    <!-- Title + Model -->
-    <h1 id="videoTitle">Another Me</h1>
+    <!-- Title + Model (JS se fill hoga) -->
+    <h1 id="videoTitle">Loading…</h1>
     <div class="video-meta">
-      <span id="videoModel">Nika Nut</span> •
-      <span id="videoDuration">33:29</span> •
-      <span>4K</span>
+      <span id="videoModel"></span> •
+      <span id="videoDuration"></span> •
+      <span id="videoQuality">4K</span>
     </div>
 
     <!-- Video Player -->
     <div class="video-player">
-      <video id="videoPlayer" controls controlsList="nodownload"
-        disablePictureInPicture preload="metadata">
-        <source id="videoSrc" src="preview.mp4" type="video/mp4">
+      <video id="videoPlayer"
+             controls
+             controlsList="nodownload"
+             disablePictureInPicture
+             preload="metadata"
+             oncontextmenu="return false">
+        <source id="videoSrc" src="" type="video/mp4">
         Your browser does not support the video tag.
       </video>
 
@@ -51,22 +55,9 @@
       </div>
     </div>
 
-    <!-- Related Videos -->
+    <!-- Related Videos (same model / others) -->
     <h3 class="related-heading">Related Videos</h3>
-    <div class="related-grid">
-      <a href="video.html" class="related-card">
-        <img src="3.png" alt="">
-        <p>Thanksgiving Dinner Idea</p>
-      </a>
-      <a href="video.html" class="related-card">
-        <img src="4.png" alt="">
-        <p>Got Milk?</p>
-      </a>
-      <a href="video.html" class="related-card">
-        <img src="5.png" alt="">
-        <p>Noi Feja For OnlyTarts</p>
-      </a>
-    </div>
+    <div id="relatedGrid" class="related-grid"></div>
 
   </section>
 
@@ -76,7 +67,7 @@
       <a href="#">Terms</a>
       <a href="#">Privacy</a>
     </div>
-    <div id="yearFooter" class="small"></div>
+    <div class="small">© <span id="year"></span> Infectaria</div>
   </footer>
 </main>
 
