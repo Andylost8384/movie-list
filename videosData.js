@@ -10,7 +10,7 @@ window.VIDEOS = [
     duration: "18:44",
     createdAt: "2025-08-29",
     // Thumbnail = Lia Lin image
-    thumb: "https://ik.imagekit.io/uno5sox6q/Lia%20Lin.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/Secret%20Feelings%20Act%201.png",
     previewUrl: "https://archive.org/download/feelac-1/Preview%20Secret%20Feelings%20Act%201.mp4",
     fullUrl: "https://archive.org/download/feelac-1/Feelac1.mp4"
   },
@@ -21,7 +21,7 @@ window.VIDEOS = [
     category: "Hentaied",
     duration: "13:47",
     createdAt: "2025-08-22",
-    thumb: "https://ik.imagekit.io/uno5sox6q/Ashby%20Winter.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/Descending.png",
     previewUrl: "https://archive.org/download/a-dangerous-encounter-freeze-1080p/Descending%20-%20Hentaied.mp4",
     fullUrl: "https://archive.org/download/4-k-60-fpsheav/Des1080p.mp4"
   },
@@ -32,7 +32,7 @@ window.VIDEOS = [
     category: "Hentaied",
     duration: "10:44",
     createdAt: "2025-08-29",
-    thumb: "https://ik.imagekit.io/uno5sox6q/Tiffany%20Tatum.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/Descending%202.png",
     previewUrl: "https://archive.org/download/feelac-1/Preview%20Descending%202%20-%20Hentaied.ia.mp4",
     fullUrl: "https://archive.org/download/4-k-60-fpsheav/Des21080p.mp4"
   },
@@ -43,7 +43,7 @@ window.VIDEOS = [
     category: "Hentaied",
     duration: "9:41",
     createdAt: "2025-10-31",
-    thumb: "https://ik.imagekit.io/uno5sox6q/Sata%20Jones.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/Descending%203.png",
     previewUrl: "https://archive.org/download/ending-3-1080p/Previewending3.mp4",
     fullUrl: "https://archive.org/download/ending-3-1080p/ending3%201080p.mp4"
   },
@@ -65,7 +65,7 @@ window.VIDEOS = [
     category: "Lesbian",
     duration: "31:21",
     createdAt: "2022-12-15",
-    thumb: "https://ik.imagekit.io/uno5sox6q/Kelly%20Collins.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/Naked%20Yoga%201.jpg",
     previewUrl: "https://archive.org/download/yo-2-4k/Preview%20Yoga%201.mp4",
     fullUrl: "https://archive.org/download/yo-2-4k/1%201080p.mp4"
   },
