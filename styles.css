@@ -461,7 +461,16 @@ body {
 
 .model-thumb img {
   width: 100%;
-  height: 240px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+/* Home page popular models */
+.model img {
+  width: 219px;       /* approx rendered width */
+  height: 328px;      /* 2:3 aspect ratio */
+  max-width: 100%;
+  border-radius: 15px;
   object-fit: cover;
 }
 
