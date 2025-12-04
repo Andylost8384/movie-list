@@ -461,8 +461,9 @@ body {
 
 .model-thumb img {
   width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+  height: auto;        /* full image height */
+  display: block;
+  object-fit: contain; /* image full visible, no crop */
 }
 
 /* Home page popular models */
