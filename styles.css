@@ -24,7 +24,8 @@ body {
   top: 0;
   width: 100%;
   z-index: 999;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.15); /* pehle 0.9 tha */
+  backdrop-filter: blur(8px);            /* glass effect */
 }
 
 .topbar .container {
@@ -310,8 +311,8 @@ body {
 /* ===== HERO SLIDER ===== */
 .hero {
   position: relative;
-  height: calc(100vh - 70px); /* Fixed: full screen below header */
-  margin-top: 70px; /* navbar ki height adjust */
+  height: 100vh;      /* poori screen cover kare */
+  margin: 0;
   padding: 0;
   overflow: hidden;
   background: #000;
