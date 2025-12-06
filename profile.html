@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Account — Infectaria</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container">
+    <div class="brand">Infectaria</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="videos.html?category=Hentaied">Hentaied</a>
+      <a href="videos.html?category=Lesbian">Lesbian</a>
+      <a href="videos.html?category=All">All Sites</a>
+      <button id="searchBtn" class="icon">🔍</button>
+      <a href="login.html" class="login">Login</a>
+      <a href="profile.html" class="login">Account</a>
+      <a href="#" class="cta">Get Access</a>
+    </nav>
+  </div>
+</header>
+
+<main style="padding-top:100px;">
+  <section class="container">
+    <h1 class="dash-title">My Account</h1>
+    <p class="models-subtitle">Manage your profile and premium subscription.</p>
+
+    <div class="dashboard-grid">
+      <!-- LEFT: ACCOUNT SUMMARY -->
+      <div class="dash-card">
+        <h2>Account summary</h2>
+        <div class="dash-row">
+          <span>Email</span>
+          <span id="dashEmail" class="muted">—</span>
+        </div>
+        <div class="dash-row">
+          <span>Member since</span>
+          <span id="dashJoined" class="muted">—</span>
+        </div>
+        <div class="dash-row">
+          <span>Status</span>
+          <span id="dashStatus" class="badge badge-free">Free</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: SUBSCRIPTION -->
+      <div class="dash-card">
+        <h2>Subscription</h2>
+        <p id="dashSubText" class="muted">
+          Loading your subscription details...
+        </p>
+        <button id="dashUpgradeBtn" class="btn green" style="margin-top:16px;">
+          Upgrade to Premium
+        </button>
+        <button id="dashManageBtn" class="btn" style="margin-top:10px; display:none;">
+          Manage subscription
+        </button>
+      </div>
+    </div>
+
+    <!-- OPTIONAL SECTION: WATCH INFO -->
+    <div class="dashboard-grid" style="margin-top:26px;">
+      <div class="dash-card">
+        <h2>Playback settings</h2>
+        <p class="muted">
+          In future we can add options here like autoplay previews, quality preferences,
+          and content filters.
+        </p>
+      </div>
+
+      <div class="dash-card">
+        <h2>Security</h2>
+        <p class="muted">
+          To change your password, use the "Forgot password" option on the login page.
+        </p>
+        <button id="dashLogoutBtn" class="btn red" style="margin-top:12px;">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <div id="dashMessage" class="dash-message"></div>
+  </section>
+</main>
+
+<!-- Search Overlay (same as other pages) -->
+<div id="searchOverlay" class="search-overlay">
+  <div class="search-inner">
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search videos, models, categories..."
+        autocomplete="off"
+      />
+      <button id="searchClose" class="search-close">✕</button>
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+</div>
+
+<!-- AGE GATE -->
+<div id="ageGate" class="agegate">
+  <div class="agebox">
+    <h3>Adult 18+ Only</h3>
+    <p>Please confirm your age to continue.</p>
+    <div class="age-actions">
+      <button id="over18" class="btn green">I'm over 18+</button>
+      <button id="under18" class="btn red">I'm under 18</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDKs (same as login.html) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="videosData.js"></script>
+<script src="search.js"></script>
+<script src="profile.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
