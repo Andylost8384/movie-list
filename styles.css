@@ -119,8 +119,9 @@ body {
 
 /* LATEST VIDEOS */
 .latest {
-  padding-top: 40px; /* gap kam kiya */
-  margin-top: -20px; /* Latest videos ko aur upar lao */
+  padding-top: 32px;
+  padding-bottom: 80px;
+  margin-top: 0;
 }
 
 .latest h2 {
