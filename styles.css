@@ -307,10 +307,11 @@ body {
 }
 
 /* ===== HERO SLIDER ===== */
-
 .hero {
-  height: 78vh;
   position: relative;
+  height: calc(100vh - 70px); /* Fixed: full screen below header */
+  margin-top: 70px; /* navbar ki height adjust */
+  padding: 0;
   overflow: hidden;
   background: #000;
 }
