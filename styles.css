@@ -306,6 +306,104 @@ body {
   padding: 80px 0;
 }
 
+/* ===== HERO SLIDER ===== */
+
+.hero {
+  height: 78vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Har slide full-screen */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+/* Left side dark gradient for text readability */
+.hero-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.9) 0%,
+    rgba(0,0,0,0.7) 35%,
+    rgba(0,0,0,0.0) 70%
+  );
+  z-index: 1;
+}
+
+/* Image + video layer */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-media img,
+.hero-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.7s ease;
+}
+
+.hero-media video {
+  opacity: 0;
+}
+
+/* Jab video play ho rahi ho */
+.hero-slide.playing-video .hero-media video {
+  opacity: 1;
+}
+
+.hero-slide.playing-video .hero-media img {
+  opacity: 0;
+}
+
+/* Text overlay */
+.hero-overlay {
+  position: absolute;
+  left: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  max-width: 520px;
+  color: #fff;
+}
+
+.hero-title {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #d0d0ff;
+}
+
+/* Accent colors for different words */
+.accent-purple { color: #b18cff; }
+.accent-coral  { color: #ff7f9f; }
+.accent-red    { color: #ff4b4b; }
+.accent-green  { color: #6bff7a; }
+.accent-blue   { color: #6ecbff; }
+.accent-gold   { color: #f6b94a; }
+
 .welcome-box {
   background: #efefef;
   padding: 40px;
