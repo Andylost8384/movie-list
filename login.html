@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login — Infectaria</title>
+  <title>Login / Signup — Infectaria</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,59 +12,170 @@
   <div class="container">
     <div class="brand">Infectaria</div>
     <nav class="nav">
-  <a href="index.html">Home</a>
-  <a href="models.html">Models</a>
-  <a href="videos.html?category=Hentaied">Hentaied</a>
-  <a href="videos.html?category=Lesbian">Lesbian</a>
-  <a href="videos.html?category=All">All Sites</a>
-  <button id="searchBtn" class="icon">🔍</button>
-  <a href="login.html" class="login">Login</a>
-  <a href="profile.html" class="login">Account</a>
-  <a href="#" class="cta">Get Access</a>
-</nav>
+      <a href="index.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="videos.html?category=Hentaied">Hentaied</a>
+      <a href="videos.html?category=Lesbian">Lesbian</a>
+      <a href="videos.html?category=All">All Sites</a>
+      <button id="searchBtn" class="icon">🔍</button>
+      <a href="login.html" class="login">Login</a>
+      <a href="profile.html" class="login">Account</a>
+      <a href="#" class="cta">Get Access</a>
+    </nav>
   </div>
 </header>
 
-<main style="padding-top:90px;">
-  <section class="container">
-    <h1>Login / Sign up</h1>
-    <p class="models-subtitle">
-      Login with your email to access your premium subscription.
+<main style="padding-top:100px;">
+  <section class="container auth-steps">
+
+    <!-- Step indicator -->
+    <div class="step-indicator">
+      <div class="step-dot active" data-step="1">1</div>
+      <div class="step-dot" data-step="2">2</div>
+      <div class="step-dot" data-step="3">3</div>
+    </div>
+
+    <!-- STATUS MESSAGE -->
+    <p id="authStatus" class="muted" style="margin-bottom:16px;">
+      Step 1: Create your account or login with your email.
     </p>
 
-    <form id="loginForm" class="login-form">
-      <label>
-        Email
-        <input type="email" id="email" required>
-      </label>
-      <label>
-        Password
-        <input type="password" id="password" required minlength="6">
-      </label>
-
-      <button type="submit" class="btn green">Login</button>
-      <p class="tiny">
-        If this email is not registered, an account will be created automatically.
+    <!-- STEP 1: ACCOUNT -->
+    <div class="auth-step" id="step1">
+      <h1>Step 1 — Create your account</h1>
+      <p class="models-subtitle">
+        Use your email and a password. If this email already exists, we will log you in.
       </p>
-    </form>
 
-    <div id="authStatus" class="auth-status tiny"></div>
+      <form class="login-form" id="accountForm">
+        <label>
+          Email
+          <input type="email" id="loginEmail" required>
+        </label>
+        <label>
+          Password
+          <input type="password" id="loginPassword" required>
+        </label>
+        <button type="submit" class="btn green">Continue to Step 2</button>
+      </form>
+    </div>
 
-    <div id="premiumStatus" class="premium-status tiny"></div>
+    <!-- STEP 2: PLAN -->
+    <div class="auth-step hidden" id="step2">
+      <h1>Step 2 — Choose your plan</h1>
+      <p class="models-subtitle">
+        We currently offer one simple plan for full access.
+      </p>
 
-    <button id="logoutBtn" class="btn red" style="margin-top:16px; display:none;">
-      Logout
-    </button>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <h2>30 DAYS</h2>
+          <p class="plan-sub">Streaming Only</p>
+
+          <div class="plan-price">
+            <span class="amount">$0.77</span>
+            <span class="per"> (₹69)</span>
+          </div>
+
+          <p class="plan-line"><strong>Unlimited</strong> Streaming</p>
+          <p class="plan-line"><strong>No</strong> Downloads</p>
+
+          <p class="plan-note">
+            Billed in one payment of <strong>$0.77 (₹69)</strong>.
+          </p>
+
+          <button id="choosePlanBtn" class="btn green" style="margin-top:14px;">
+            Choose this plan
+          </button>
+        </div>
+      </div>
+
+      <button class="btn" id="backToStep1" style="margin-top:14px;">← Back to Step 1</button>
+    </div>
+
+    <!-- STEP 3: PAYMENT -->
+    <div class="auth-step hidden" id="step3">
+      <h1>Step 3 — Complete your payment</h1>
+      <p class="models-subtitle">
+        Pay for your 30-day plan using UPI (India) or Binance (International), then confirm.
+      </p>
+
+      <div class="pay-grid">
+        <!-- UPI column -->
+        <div class="pay-card">
+          <h2>India — UPI / QR</h2>
+          <p class="muted">
+            Scan the QR code or pay to this UPI ID from any UPI app (PhonePe, Paytm, Google Pay, etc.).
+          </p>
+
+          <!-- TODO: apna QR image yahan lagao -->
+          <div class="upi-qr">
+            <!-- Replace src with your actual QR image -->
+            <img src="upi-qr-placeholder.png" alt="UPI QR">
+          </div>
+
+          <!-- TODO: apna real UPI ID yahan likho -->
+          <p class="upi-id">
+            UPI ID: <strong>your-upi-id@upi</strong>
+          </p>
+
+          <p class="plan-note">
+            Amount: <strong>₹69</strong> (approx $0.77). Mention your email in notes if possible.
+          </p>
+        </div>
+
+        <!-- Binance column -->
+        <div class="pay-card">
+          <h2>International — Binance Pay</h2>
+          <p class="muted">
+            Send the equivalent of <strong>$0.77</strong> in USDT via Binance Pay.
+          </p>
+
+          <!-- TODO: apna Binance Pay ID / QR -->
+          <p class="upi-id">
+            Binance Pay ID: <strong>YOUR_BINANCE_ID</strong>
+          </p>
+          <p class="plan-note">
+            After sending, keep your transaction ID. We may contact you if verification is needed.
+          </p>
+        </div>
+      </div>
+
+      <button id="confirmPaidBtn" class="btn green" style="margin-top:18px;">
+        I've completed the payment
+      </button>
+      <button class="btn" id="backToStep2" style="margin-top:8px;">
+        ← Back to Step 2
+      </button>
+    </div>
+
+    <div id="finalMessage" class="dash-message" style="margin-top:18px;"></div>
   </section>
 </main>
 
-<!-- Age gate reuse (optional) -->
+<!-- Search Overlay -->
+<div id="searchOverlay" class="search-overlay">
+  <div class="search-inner">
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search videos, models, categories..."
+        autocomplete="off"
+      />
+      <button id="searchClose" class="search-close">✕</button>
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+</div>
+
+<!-- AGE GATE -->
 <div id="ageGate" class="agegate">
   <div class="agebox">
-    <h3>18+ Warning</h3>
-    <p>This content is for adults only.</p>
+    <h3>Adult 18+ Only</h3>
+    <p>Please confirm your age to continue.</p>
     <div class="age-actions">
-      <button id="over18" class="btn green">I'm over 18</button>
+      <button id="over18" class="btn green">I'm over 18+</button>
       <button id="under18" class="btn red">I'm under 18</button>
     </div>
   </div>
@@ -76,7 +187,9 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
 <script src="firebase-config.js"></script>
+<script src="videosData.js"></script>
+<script src="search.js"></script>
+<script src="login.js"></script>
 <script src="script.js"></script>
-<script src="auth.js"></script>
 </body>
 </html>
