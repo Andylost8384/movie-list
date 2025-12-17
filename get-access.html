@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Get Access — Infectaria</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -27,104 +27,79 @@
 <main style="padding-top:110px;">
   <section class="container auth-steps">
 
-    <!-- Step Indicator -->
+    <!-- STEP INDICATOR -->
     <div class="step-indicator">
-      <div class="step-dot active" data-step="1">1</div>
-      <div class="step-dot" data-step="2">2</div>
-      <div class="step-dot" data-step="3">3</div>
+      <div class="step-dot active">1</div>
+      <div class="step-dot">2</div>
+      <div class="step-dot">3</div>
     </div>
 
-    <!-- STATUS -->
-    <p id="authStatus" class="muted" style="margin-bottom:16px;">
-      Step 1 — Create your account
-    </p>
-
-    <!-- STEP 1: ACCOUNT CREATION -->
+    <!-- ================= STEP 1 ================= -->
     <div class="auth-step" id="step1">
-      <h1>Step 1 — Create your Account</h1>
+      <h1>Create your account</h1>
       <p class="models-subtitle">
-        Use your email and a password. Your account will be created instantly.
+        Enter your email and password to create your account.
       </p>
 
-      <form id="signupForm" class="login-form">
+      <form class="login-form" id="signupForm">
         <label>Email
-          <input type="email" id="signupEmail" required />
+          <input type="email" id="signupEmail" required>
         </label>
 
         <label>Password
-          <input type="password" id="signupPassword" required />
+          <input type="password" id="signupPassword" required>
         </label>
 
-        <button type="submit" class="btn green">Continue to Step 2</button>
+        <button type="submit" class="btn green" id="signupBtn">
+          Continue
+        </button>
       </form>
 
-      <p id="signupMessage" style="color:red; margin-top:10px;"></p>
+      <p id="signupMessage" style="margin-top:14px;color:red;"></p>
     </div>
 
-    <!-- STEP 2: PLAN -->
+    <!-- ================= STEP 2 ================= -->
     <div class="auth-step hidden" id="step2">
-      <h1>Step 2 — Choose your Plan</h1>
-      <p class="models-subtitle">We currently offer one simple plan.</p>
+      <h1>Choose your plan</h1>
 
       <div class="plans-grid">
         <div class="plan-card">
           <h2>30 DAYS</h2>
-          <p class="plan-sub">Streaming Only</p>
+          <p>Streaming Only</p>
+          <p><strong>$0.77 (₹69)</strong></p>
 
-          <div class="plan-price">
-            <span class="amount">$0.77</span><span class="per"> (₹69)</span>
-          </div>
-
-          <p class="plan-line"><strong>Unlimited</strong> Streaming</p>
-          <p class="plan-line"><strong>No</strong> Downloads</p>
-
-          <p class="plan-note">
-            Billed in one payment of <strong>$0.77 (₹69)</strong>.
-          </p>
-
-          <button class="btn green" id="goToStep3">Choose this Plan</button>
+          <button class="btn green" id="toPayment">
+            Choose this plan
+          </button>
         </div>
       </div>
-
-      <button class="btn" id="back1">← Back to Step 1</button>
     </div>
 
-    <!-- STEP 3: PAYMENT -->
+    <!-- ================= STEP 3 ================= -->
     <div class="auth-step hidden" id="step3">
-      <h1>Step 3 — Complete your Payment</h1>
-      <p class="models-subtitle">
-        Pay via UPI (India) or Binance Pay (International), then confirm.
-      </p>
+      <h1>Complete payment</h1>
 
       <div class="pay-grid">
 
-        <!-- UPI -->
         <div class="pay-card">
-          <h2>India — Pay using UPI</h2>
-          <p class="muted">Scan QR or pay to UPI ID.</p>
-
-          <img src="https://ik.imagekit.io/uno5sox6q/WhatsApp.jpg" class="upi-qr" />
-
-          <p class="upi-id">UPI ID: <strong>your-upi-id@upi</strong></p>
-          <p class="plan-note">Amount: <strong>₹69</strong></p>
+          <h2>India — UPI</h2>
+          <img src="https://ik.imagekit.io/uno5sox6q/WhatsApp.jpg" class="upi-qr">
+          <p>UPI ID: <strong>your-upi-id@upi</strong></p>
+          <p>Amount: ₹69</p>
         </div>
 
-        <!-- Binance -->
         <div class="pay-card">
-          <h2>International — Binance Pay</h2>
-
-          <p class="muted">Send <strong>$0.77</strong> in USDT.</p>
-          <p class="upi-id">Binance ID: <strong>YOUR_BINANCE_ID</strong></p>
+          <h2>International — Binance</h2>
+          <p>Binance Pay ID: <strong>YOUR_BINANCE_ID</strong></p>
         </div>
+
       </div>
 
-      <button class="btn green" id="confirmPaidBtn">
+      <button class="btn green" id="confirmPayment">
         I've completed the payment
       </button>
 
-      <button class="btn" id="back2">← Back to Step 2</button>
-
-      <p id="paymentMessage" style="margin-top:12px; color:green;"></p>
+      <p id="paymentMsg" style="margin-top:14px;color:green;"></p>
     </div>
 
   </section>
@@ -137,67 +112,65 @@
 <script src="firebase-config.js"></script>
 
 <script>
-// Firebase auth
 const auth = firebase.auth();
-const db = firebase.database();
+const db   = firebase.database();
 
-/* STEP SWITCHER */
-function showStep(n) {
-  document.querySelectorAll('.auth-step').forEach(s => s.classList.add('hidden'));
-  document.getElementById("step" + n).classList.remove("hidden");
-
-  document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
-  document.querySelector('.step-dot[data-step="' + n + '"]').classList.add('active');
+/* STEP SWITCH */
+function showStep(n){
+  document.querySelectorAll('.auth-step')
+    .forEach(s => s.classList.add('hidden'));
+  document.getElementById('step'+n).classList.remove('hidden');
 }
 
-/* STEP 1 — SIGNUP */
-document.getElementById("signupForm").addEventListener("submit", (e) => {
+/* ================= SIGNUP ================= */
+document.getElementById("signupForm").addEventListener("submit", e => {
   e.preventDefault();
 
-  const email = signupEmail.value;
-  const pass = signupPassword.value;
+  signupMessage.textContent = "";
+  signupBtn.disabled = true;
+  signupBtn.textContent = "Creating...";
+
+  const email = signupEmail.value.trim();
+  const pass  = signupPassword.value;
 
   auth.createUserWithEmailAndPassword(email, pass)
-    .then(() => {
+    .then(cred => {
+      // Save user in DB
+      db.ref("users/"+cred.user.uid).set({
+        email: email,
+        premium: false,
+        createdAt: Date.now()
+      });
+
       showStep(2);
     })
-    .catch((err) => {
+    .catch(err => {
+
       if (err.code === "auth/email-already-in-use") {
-        // If email exists, login instead
-        auth.signInWithEmailAndPassword(email, pass)
-          .then(() => showStep(2))
-          .catch(() => signupMessage.textContent = "Incorrect password.");
+        signupMessage.textContent =
+          "This email is already registered. Please login.";
       } else {
         signupMessage.textContent = err.message;
       }
+
+      signupBtn.disabled = false;
+      signupBtn.textContent = "Continue";
     });
 });
 
 /* STEP 2 → STEP 3 */
-document.getElementById("goToStep3").addEventListener("click", () => {
+document.getElementById("toPayment").addEventListener("click", ()=>{
   showStep(3);
 });
-document.getElementById("back1").addEventListener("click", () => showStep(1));
-document.getElementById("back2").addEventListener("click", () => showStep(2));
 
-/* STEP 3 — PAYMENT CONFIRMATION */
-document.getElementById("confirmPaidBtn").addEventListener("click", () => {
+/* PAYMENT CONFIRM */
+document.getElementById("confirmPayment").addEventListener("click", ()=>{
+  paymentMsg.textContent =
+    "Payment confirmation received. Premium will be activated shortly.";
 
-  if (!auth.currentUser) {
-    alert("Login error. Try again.");
-    return;
-  }
-
-  const uid = auth.currentUser.uid;
-
-  db.ref("users/" + uid).set({
-    email: auth.currentUser.email,
-    premium: false, // manually you will set true after checking payment
-    created: Date.now()
-  });
-
-  paymentMessage.textContent =
-    "Payment confirmation sent! We will activate your premium soon.";
+  setTimeout(()=>{
+    window.location.href = "profile.html";
+  }, 3000);
 });
 </script>
 
