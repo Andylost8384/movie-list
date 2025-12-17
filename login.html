@@ -18,9 +18,11 @@
       <a href="videos.html?category=Lesbian">Lesbian</a>
       <a href="videos.html?category=All">All Sites</a>
       <button id="searchBtn" class="icon">🔍</button>
-      <a href="login.html" class="login active">Login</a>
+      <a href="login.html" class="login">Login</a>
       <a href="profile.html" class="login">Account</a>
-      <a href="signup.html" class="cta">Get Access</a>
+
+      <!-- Get Access → open signup 3-step page -->
+      <a href="get-access.html" class="cta">Get Access</a>
     </nav>
   </div>
 </header>
@@ -28,32 +30,39 @@
 <main style="padding-top:110px;">
   <section class="container">
 
-    <h1>Login to your Account</h1>
-    <p class="models-subtitle">Enter your email & password to continue.</p>
+    <div id="loginBox">
+      <h1>Login to your Account</h1>
+      <p class="models-subtitle">
+        Enter your email & password to continue.
+      </p>
 
-    <form class="login-form" id="loginForm">
-      <label>
-        Email
-        <input type="email" id="email" required>
-      </label>
+      <form class="login-form" id="loginForm">
+        <label>Email
+          <input type="email" id="loginEmail" required>
+        </label>
 
-      <label>
-        Password
-        <input type="password" id="password" required>
-      </label>
+        <label>Password
+          <input type="password" id="loginPassword" required>
+        </label>
 
-      <button type="submit" class="btn green">Login</button>
-    </form>
+        <button type="submit" class="btn green">Login</button>
+      </form>
 
-    <p style="margin-top:12px;">
-      <a id="forgotPass" style="cursor:pointer; color:#0aa;">Forgot password?</a>
-    </p>
+      <!-- Forgot password -->
+      <p style="margin-top:12px;">
+        <a id="forgotPass" style="cursor:pointer; color:#0aa;">Forgot password?</a>
+      </p>
 
-    <p style="margin-top:12px;">
-      New here? <a href="signup.html" style="color:#0aa;">Create an account</a>
-    </p>
+      <!-- Signup link -->
+      <p style="margin-top:12px;">
+        Don’t have an account?
+        <a href="get-access.html" style="cursor:pointer; color:#0aa;">
+          Sign up
+        </a>
+      </p>
 
-    <p id="loginMessage" style="margin-top:14px; color:red;"></p>
+      <p id="loginMessage" style="margin-top:14px; color:red;"></p>
+    </div>
 
   </section>
 </main>
@@ -63,37 +72,26 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
 
-<!-- LOGIN JS -->
 <script>
-  const auth = firebase.auth();
+const auth = firebase.auth();
 
-  // LOGIN HANDLER
-  document.getElementById("loginForm").addEventListener("submit", (e) => {
-    e.preventDefault();
+/* ---------------------- LOGIN ---------------------------- */
+document.getElementById("loginForm").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const email = loginEmail.value;
+  const password = loginPassword.value;
 
-    const email = document.getElementById("email").value;
-    const pass  = document.getElementById("password").value;
+  auth.signInWithEmailAndPassword(email, password)
+    .then(()=> window.location.href="profile.html")
+    .catch(()=> loginMessage.innerText = "Invalid email or password");
+});
 
-    auth.signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        window.location.href = "profile.html";
-      })
-      .catch(err => {
-        document.getElementById("loginMessage").innerText = 
-          "Invalid email or password.";
-      });
-  });
-
-  // FORGOT PASSWORD
-  document.getElementById("forgotPass").addEventListener("click", () => {
-    const email = document.getElementById("email").value;
-
-    if (!email) return alert("Enter your email first!");
-
-    auth.sendPasswordResetEmail(email)
-      .then(() => alert("Password reset link sent to your email."))
-      .catch(() => alert("Failed to send reset email."));
-  });
+/* ---------------------- FORGOT PASSWORD ------------------- */
+forgotPass.addEventListener("click", ()=>{
+  if(!loginEmail.value) return alert("Enter your email first!");
+  auth.sendPasswordResetEmail(loginEmail.value)
+    .then(()=> alert("Password reset link sent to your email"));
+});
 </script>
 
 <script src="search.js"></script>
