@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login / Signup — Infectaria</title>
+  <title>Login — Infectaria</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,178 +18,85 @@
       <a href="videos.html?category=Lesbian">Lesbian</a>
       <a href="videos.html?category=All">All Sites</a>
       <button id="searchBtn" class="icon">🔍</button>
-      <a href="login.html" class="login">Login</a>
+      <a href="login.html" class="login active">Login</a>
       <a href="profile.html" class="login">Account</a>
-      <a href="#" class="cta">Get Access</a>
+      <a href="signup.html" class="cta">Get Access</a>
     </nav>
   </div>
 </header>
 
-<main style="padding-top:100px;">
-  <section class="container auth-steps">
+<main style="padding-top:110px;">
+  <section class="container">
 
-    <!-- Step indicator -->
-    <div class="step-indicator">
-      <div class="step-dot active" data-step="1">1</div>
-      <div class="step-dot" data-step="2">2</div>
-      <div class="step-dot" data-step="3">3</div>
-    </div>
+    <h1>Login to your Account</h1>
+    <p class="models-subtitle">Enter your email & password to continue.</p>
 
-    <!-- STATUS MESSAGE -->
-    <p id="authStatus" class="muted" style="margin-bottom:16px;">
-      Step 1: Create your account or login with your email.
+    <form class="login-form" id="loginForm">
+      <label>
+        Email
+        <input type="email" id="email" required>
+      </label>
+
+      <label>
+        Password
+        <input type="password" id="password" required>
+      </label>
+
+      <button type="submit" class="btn green">Login</button>
+    </form>
+
+    <p style="margin-top:12px;">
+      <a id="forgotPass" style="cursor:pointer; color:#0aa;">Forgot password?</a>
     </p>
 
-    <!-- STEP 1: ACCOUNT -->
-    <div class="auth-step" id="step1">
-      <h1>Step 1 — Create your account</h1>
-      <p class="models-subtitle">
-        Use your email and a password. If this email already exists, we will log you in.
-      </p>
+    <p style="margin-top:12px;">
+      New here? <a href="signup.html" style="color:#0aa;">Create an account</a>
+    </p>
 
-      <form class="login-form" id="accountForm">
-        <label>
-          Email
-          <input type="email" id="loginEmail" required>
-        </label>
-        <label>
-          Password
-          <input type="password" id="loginPassword" required>
-        </label>
-        <button type="submit" class="btn green">Continue to Step 2</button>
-      </form>
-    </div>
+    <p id="loginMessage" style="margin-top:14px; color:red;"></p>
 
-    <!-- STEP 2: PLAN -->
-    <div class="auth-step hidden" id="step2">
-      <h1>Step 2 — Choose your plan</h1>
-      <p class="models-subtitle">
-        We currently offer one simple plan for full access.
-      </p>
-
-      <div class="plans-grid">
-        <div class="plan-card">
-          <h2>30 DAYS</h2>
-          <p class="plan-sub">Streaming Only</p>
-
-          <div class="plan-price">
-            <span class="amount">$0.77</span>
-            <span class="per"> (₹69)</span>
-          </div>
-
-          <p class="plan-line"><strong>Unlimited</strong> Streaming</p>
-          <p class="plan-line"><strong>No</strong> Downloads</p>
-
-          <p class="plan-note">
-            Billed in one payment of <strong>$0.77 (₹69)</strong>.
-          </p>
-
-          <button id="choosePlanBtn" class="btn green" style="margin-top:14px;">
-            Choose this plan
-          </button>
-        </div>
-      </div>
-
-      <button class="btn" id="backToStep1" style="margin-top:14px;">← Back to Step 1</button>
-    </div>
-
-    <!-- STEP 3: PAYMENT -->
-    <div class="auth-step hidden" id="step3">
-      <h1>Step 3 — Complete your payment</h1>
-      <p class="models-subtitle">
-        Pay for your 30-day plan using UPI (India) or Binance (International), then confirm.
-      </p>
-
-      <div class="pay-grid">
-        <!-- UPI column -->
-        <div class="pay-card">
-          <h2>India — UPI / QR</h2>
-          <p class="muted">
-            Scan the QR code or pay to this UPI ID from any UPI app (PhonePe, Paytm, Google Pay, etc.).
-          </p>
-
-          <!-- TODO: apna QR image yahan lagao -->
-          <div class="upi-qr">
-            <!-- Replace src with your actual QR image -->
-            <img src="https://ik.imagekit.io/uno5sox6q/WhatsApp.jpg" alt="UPI QR">
-          </div>
-
-          <!-- TODO: apna real UPI ID yahan likho -->
-          <p class="upi-id">
-            UPI ID: <strong>your-upi-id@upi</strong>
-          </p>
-
-          <p class="plan-note">
-            Amount: <strong>₹69</strong> (approx $0.77). Mention your email in notes if possible.
-          </p>
-        </div>
-
-        <!-- Binance column -->
-        <div class="pay-card">
-          <h2>International — Binance Pay</h2>
-          <p class="muted">
-            Send the equivalent of <strong>$0.77</strong> in USDT via Binance Pay.
-          </p>
-
-          <!-- TODO: apna Binance Pay ID / QR -->
-          <p class="upi-id">
-            Binance Pay ID: <strong>YOUR_BINANCE_ID</strong>
-          </p>
-          <p class="plan-note">
-            After sending, keep your transaction ID. We may contact you if verification is needed.
-          </p>
-        </div>
-      </div>
-
-      <button id="confirmPaidBtn" class="btn green" style="margin-top:18px;">
-        I've completed the payment
-      </button>
-      <button class="btn" id="backToStep2" style="margin-top:8px;">
-        ← Back to Step 2
-      </button>
-    </div>
-
-    <div id="finalMessage" class="dash-message" style="margin-top:18px;"></div>
   </section>
 </main>
 
-<!-- Search Overlay -->
-<div id="searchOverlay" class="search-overlay">
-  <div class="search-inner">
-    <div class="search-box">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search videos, models, categories..."
-        autocomplete="off"
-      />
-      <button id="searchClose" class="search-close">✕</button>
-    </div>
-    <div id="searchResults" class="search-results"></div>
-  </div>
-</div>
-
-<!-- AGE GATE -->
-<div id="ageGate" class="agegate">
-  <div class="agebox">
-    <h3>Adult 18+ Only</h3>
-    <p>Please confirm your age to continue.</p>
-    <div class="age-actions">
-      <button id="over18" class="btn green">I'm over 18+</button>
-      <button id="under18" class="btn red">I'm under 18</button>
-    </div>
-  </div>
-</div>
-
-<!-- Firebase SDKs -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
 <script src="firebase-config.js"></script>
-<script src="videosData.js"></script>
+
+<!-- LOGIN JS -->
+<script>
+  const auth = firebase.auth();
+
+  // LOGIN HANDLER
+  document.getElementById("loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const pass  = document.getElementById("password").value;
+
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        window.location.href = "profile.html";
+      })
+      .catch(err => {
+        document.getElementById("loginMessage").innerText = 
+          "Invalid email or password.";
+      });
+  });
+
+  // FORGOT PASSWORD
+  document.getElementById("forgotPass").addEventListener("click", () => {
+    const email = document.getElementById("email").value;
+
+    if (!email) return alert("Enter your email first!");
+
+    auth.sendPasswordResetEmail(email)
+      .then(() => alert("Password reset link sent to your email."))
+      .catch(() => alert("Failed to send reset email."));
+  });
+</script>
+
 <script src="search.js"></script>
-<script src="login.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
