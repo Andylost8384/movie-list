@@ -519,7 +519,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 99999;
 }
 
 .agebox {
@@ -528,6 +528,7 @@ body {
   max-width: 600px;
   text-align: center;
   border-radius: 12px;
+  pointer-events: auto; /* IMPORTANT */
 }
 
 .age-actions {
