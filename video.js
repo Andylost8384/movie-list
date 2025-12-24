@@ -1,81 +1,113 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  if (!window.VIDEOS) return; // Safety check
+  if (!window.VIDEOS) return;
 
-  // ---- URL se video title read karna ----
+  /* =========================================
+     GET VIDEO FROM URL
+  ========================================= */
   const params = new URLSearchParams(window.location.search);
   const titleParam = params.get("title");
 
-  let currentVideo = window.VIDEOS.find(v => v.title === titleParam);
+  let currentVideo = window.VIDEOS.find(
+    v => v.title === titleParam
+  );
 
-  // Agar URL me kuch galti ho jaye → Latest video dikhao
+  // fallback → latest video
   if (!currentVideo) {
-    currentVideo = [...window.VIDEOS].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    )[0];
+    currentVideo = [...window.VIDEOS]
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
   }
 
-  // ---- DOM Elements ----
-  const titleEl = document.getElementById("videoTitle");
-  const modelEl = document.getElementById("videoModel");
+  /* =========================================
+     DOM ELEMENTS
+  ========================================= */
+  const titleEl    = document.getElementById("videoTitle");
+  const modelEl    = document.getElementById("videoModel");
   const durationEl = document.getElementById("videoDuration");
-  const playerEl = document.getElementById("videoPlayer");
-  const overlay = document.getElementById("upgradeOverlay");
+  const player     = document.getElementById("videoPlayer");
+  const overlay    = document.getElementById("upgradeOverlay");
   const relatedGrid = document.getElementById("relatedGrid");
 
-  // ---- UI Fill ----
+  /* =========================================
+     FILL TEXT
+  ========================================= */
   titleEl.textContent = currentVideo.title;
   modelEl.textContent = currentVideo.model;
   durationEl.textContent = currentVideo.duration;
 
-  // ---- Premium Logic (Phase 1 — no login yet) ----
-  const PREMIUM = localStorage.getItem("infectaria_premium") === "true"; // TODO: Firebase Auth se set hoga
-  const PREVIEW_TIME = 30; // seconds
+  /* =========================================
+     PREMIUM LOGIC (TEMP – LOCALSTORAGE)
+     later Firebase se replace hoga
+  ========================================= */
+  const IS_PREMIUM = localStorage.getItem("infectaria_premium") === "true";
+  const PREVIEW_LIMIT = 30; // seconds
 
-  const sourceUrl = PREMIUM ? currentVideo.fullUrl : currentVideo.previewUrl;
-  playerEl.src = sourceUrl;
+  player.src = IS_PREMIUM
+    ? currentVideo.fullUrl
+    : currentVideo.previewUrl;
 
-  if (!PREMIUM) {
-    overlay.style.display = "none"; // start me hidden
-    playerEl.addEventListener("timeupdate", () => {
-      if (playerEl.currentTime >= PREVIEW_TIME) {
-        playerEl.pause();
+  overlay.style.display = "none";
+
+  /* =========================================
+     PREVIEW LIMIT FOR FREE USERS
+  ========================================= */
+  if (!IS_PREMIUM) {
+    player.addEventListener("timeupdate", () => {
+      if (player.currentTime >= PREVIEW_LIMIT) {
+        player.pause();
         overlay.style.display = "flex";
       }
     });
-  } else {
-    overlay.style.display = "none";
   }
 
-  // ---- Related Videos Logic ----
-  if (relatedGrid) {
-    relatedGrid.innerHTML = "";
+  /* =========================================
+     RELATED VIDEOS
+     - hover autoplay
+     - muted
+     - mouse leave → reset
+  ========================================= */
+  relatedGrid.innerHTML = "";
 
-    // Same category + same model preference
-    let related = window.VIDEOS.filter(
-      v => v.title !== currentVideo.title
-    );
+  const related = window.VIDEOS
+    .filter(v => v.title !== currentVideo.title)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 6);
 
-    // Sort by latest first
-    related = related.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
+  related.forEach(v => {
+    const card = document.createElement("a");
+    card.href = "video.html?title=" + encodeURIComponent(v.title);
+    card.className = "related-card";
 
-    // Top 3 related hi dikhayenge
-    related.slice(0, 3).forEach(v => {
-      const a = document.createElement("a");
-      a.href = "video.html?title=" + encodeURIComponent(v.title);
-      a.className = "related-card";
+    card.innerHTML = `
+      <video
+        muted
+        preload="metadata"
+        playsinline
+        poster="${v.thumb}"
+      >
+        <source src="${v.previewUrl}" type="video/mp4">
+      </video>
+      <p>${v.title}</p>
+    `;
 
-      a.innerHTML = `
-        <img src="${v.thumb}" alt="${v.title}">
-        <p>${v.title}</p>
-      `;
+    const vid = card.querySelector("video");
 
-      relatedGrid.appendChild(a);
+    // hover preview
+    card.addEventListener("mouseenter", () => {
+      vid.currentTime = 0;
+      vid.play().catch(() => {});
     });
-  }
 
-  // Disable Right-Click on video
-  playerEl.addEventListener("contextmenu", e => e.preventDefault());
+    card.addEventListener("mouseleave", () => {
+      vid.pause();
+      vid.currentTime = 0;
+    });
+
+    relatedGrid.appendChild(card);
+  });
+
+  /* =========================================
+     SECURITY
+  ========================================= */
+  player.addEventListener("contextmenu", e => e.preventDefault());
 });
