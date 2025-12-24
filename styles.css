@@ -151,6 +151,57 @@ body {
   }
 }
 
+/* CATEGORY / VIDEOS PAGE GRID */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .videos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Video card (same as home) */
+.video-card {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #000;
+}
+
+.video-card img,
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-preview {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.video-card:hover .video-preview {
+  opacity: 1;
+}
+
+.video-card:hover img {
+  opacity: 0;
+}
+
+.video-card-title {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 .thumb {
   position: relative;
   overflow: hidden;
