@@ -17,46 +17,52 @@
       <a href="models.html">Models</a>
       <a href="videos.html">Videos</a>
       <button id="searchBtn" class="icon">🔍</button>
-      <a href="#" class="login">Login</a>
+      <a href="login.html" class="login">Login</a>
       <a href="profile.html" class="login">Account</a>
       <a href="#" class="cta">Get Access</a>
     </nav>
   </div>
 </header>
 
-<main style="padding-top:90px;">
+<main style="padding-top:100px;">
   <section class="container video-page">
 
-    <!-- Title + Model (JS se fill hoga) -->
+    <!-- TITLE -->
     <h1 id="videoTitle">Loading…</h1>
+
+    <!-- META -->
     <div class="video-meta">
-      <span id="videoModel"></span> •
-      <span id="videoDuration"></span> •
-      <span id="videoQuality">4K</span>
+      <span id="videoModel"></span>
+      <span>•</span>
+      <span id="videoDuration"></span>
     </div>
 
-    <!-- Video Player -->
+    <!-- VIDEO PLAYER -->
     <div class="video-player">
-      <video id="videoPlayer"
-             controls
-             controlsList="nodownload"
-             disablePictureInPicture
-             preload="metadata"
-             oncontextmenu="return false">
+
+      <video
+        id="videoPlayer"
+        controls
+        preload="metadata"
+        controlsList="nodownload"
+        disablePictureInPicture
+        oncontextmenu="return false"
+      >
         <source id="videoSrc" src="" type="video/mp4">
         Your browser does not support the video tag.
       </video>
 
-      <!-- Overlay for non-premium -->
+      <!-- PREMIUM LOCK OVERLAY -->
       <div id="upgradeOverlay" class="upgrade-overlay">
         <div>
-          <p>Premium Required to Unlock Full Video</p>
-          <a href="#" class="upgrade-btn">Get Premium</a>
+          <p>Premium required to watch full video</p>
+          <a href="login.html" class="upgrade-btn">Upgrade to Premium</a>
         </div>
       </div>
+
     </div>
 
-    <!-- Related Videos (same model / others) -->
+    <!-- RELATED -->
     <h3 class="related-heading">Related Videos</h3>
     <div id="relatedGrid" class="related-grid"></div>
 
@@ -68,11 +74,13 @@
       <a href="#">Terms</a>
       <a href="#">Privacy</a>
     </div>
-    <div class="small">© <span id="year"></span> Infectaria</div>
+    <div class="small">
+      © <span id="year"></span> Infectaria
+    </div>
   </footer>
 </main>
 
-<!-- Age Gate -->
+<!-- AGE GATE -->
 <div id="ageGate" class="agegate">
   <div class="agebox">
     <h3>18+ Warning</h3>
@@ -84,7 +92,7 @@
   </div>
 </div>
 
-<!-- Search Overlay -->
+<!-- SEARCH -->
 <div id="searchOverlay" class="search-overlay">
   <div class="search-inner">
     <div class="search-box">
@@ -99,10 +107,12 @@
     <div id="searchResults" class="search-results"></div>
   </div>
 </div>
-  
+
+<!-- SCRIPTS -->
 <script src="videosData.js"></script>
 <script src="search.js"></script>
 <script src="script.js"></script>
-<script src="videos.js"></script>
+<script src="video.js"></script>
+
 </body>
 </html>
