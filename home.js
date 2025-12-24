@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("latestGrid");
   if (!grid) return;
 
-  // Sort by latest date and take top 6
+  // IMPORTANT: grid ko 2-column layout ke liye mark karo
+  grid.classList.add("latest-2col");
+
   const latest = [...window.VIDEOS]
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 6);
@@ -13,57 +15,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
   latest.forEach(video => {
 
-    const wrapper = document.createElement("div");
-
     const card = document.createElement("a");
     card.href = "video.html?title=" + encodeURIComponent(video.title);
     card.className = "video-card";
 
-    // Thumbnail
+    /* ===== THUMB IMAGE ===== */
     const img = document.createElement("img");
     img.src = video.thumb;
     img.alt = video.title;
+    img.className = "video-thumb";
 
-    card.appendChild(img);
+    /* ===== PREVIEW VIDEO ===== */
+    const preview = document.createElement("video");
+    preview.className = "video-preview";
+    preview.muted = true;
+    preview.loop = true;
+    preview.playsInline = true;
+    preview.preload = "metadata";
 
-    // Preview video (if exists)
-    let previewVideo = null;
-    if (video.previewUrl) {
-      previewVideo = document.createElement("video");
-      previewVideo.muted = true;
-      previewVideo.loop = true;
-      previewVideo.preload = "none";
-      previewVideo.playsInline = true;
+    const src = document.createElement("source");
+    src.src = video.previewUrl;
+    src.type = "video/mp4";
+    preview.appendChild(src);
 
-      const src = document.createElement("source");
-      src.src = video.previewUrl;
-      src.type = "video/mp4";
-
-      previewVideo.appendChild(src);
-      card.appendChild(previewVideo);
-
-      // Hover behavior
-      card.addEventListener("mouseenter", () => {
-        previewVideo.currentTime = 0;
-        previewVideo.play().catch(() => {});
-      });
-
-      card.addEventListener("mouseleave", () => {
-        previewVideo.pause();
-        previewVideo.currentTime = 0;
-      });
-    }
-
-    wrapper.appendChild(card);
-
-    // Title below card
-    const title = document.createElement("p");
-    title.className = "video-title";
+    /* ===== TITLE ===== */
+    const title = document.createElement("div");
+    title.className = "video-card-title";
     title.textContent = video.title;
 
-    wrapper.appendChild(title);
+    /* ===== STRUCTURE ===== */
+    card.appendChild(img);
+    card.appendChild(preview);
+    card.appendChild(title);
 
-    grid.appendChild(wrapper);
+    /* ===== HOVER PREVIEW ===== */
+    card.addEventListener("mouseenter", () => {
+      img.style.opacity = "0";
+      preview.currentTime = 0;
+      preview.play().catch(() => {});
+    });
+
+    card.addEventListener("mouseleave", () => {
+      preview.pause();
+      preview.currentTime = 0;
+      img.style.opacity = "1";
+    });
+
+    grid.appendChild(card);
   });
 });
-
