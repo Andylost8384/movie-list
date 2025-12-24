@@ -24,39 +24,43 @@
   </div>
 </header>
 
-<main style="padding-top:100px;">
-  <section class="container video-page">
+<main style="padding-top:110px;">
+  <section class="container video-watch">
 
-    <!-- TITLE -->
-    <h1 id="videoTitle">Loading…</h1>
+    <!-- LEFT / RIGHT LAYOUT -->
+    <div class="video-layout">
 
-    <!-- META -->
-    <div class="video-meta">
-      <span id="videoModel"></span>
-      <span>•</span>
-      <span id="videoDuration"></span>
-    </div>
+      <!-- LEFT: PLAYER -->
+      <div class="video-left">
+        <div class="video-player">
+          <video
+            id="videoPlayer"
+            controls
+            preload="metadata"
+            controlsList="nodownload"
+            disablePictureInPicture
+            oncontextmenu="return false"
+          >
+            <source id="videoSrc" src="" type="video/mp4">
+          </video>
 
-    <!-- VIDEO PLAYER -->
-    <div class="video-player">
+          <!-- PREMIUM OVERLAY -->
+          <div id="upgradeOverlay" class="upgrade-overlay">
+            <div>
+              <p>Premium required to watch full video</p>
+              <a href="login.html" class="upgrade-btn">Upgrade to Premium</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <video
-        id="videoPlayer"
-        controls
-        preload="metadata"
-        controlsList="nodownload"
-        disablePictureInPicture
-        oncontextmenu="return false"
-      >
-        <source id="videoSrc" src="" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <!-- RIGHT: INFO -->
+      <div class="video-right">
+        <h1 id="videoTitle">Loading…</h1>
 
-      <!-- PREMIUM LOCK OVERLAY -->
-      <div id="upgradeOverlay" class="upgrade-overlay">
-        <div>
-          <p>Premium required to watch full video</p>
-          <a href="login.html" class="upgrade-btn">Upgrade to Premium</a>
+        <div class="video-meta">
+          <div><strong>Model:</strong> <span id="videoModel"></span></div>
+          <div><strong>Duration:</strong> <span id="videoDuration"></span></div>
         </div>
       </div>
 
@@ -64,7 +68,7 @@
 
     <!-- RELATED -->
     <h3 class="related-heading">Related Videos</h3>
-    <div id="relatedGrid" class="related-grid"></div>
+    <div id="relatedGrid" class="related-small-grid"></div>
 
   </section>
 
@@ -74,9 +78,7 @@
       <a href="#">Terms</a>
       <a href="#">Privacy</a>
     </div>
-    <div class="small">
-      © <span id="year"></span> Infectaria
-    </div>
+    <div class="small">© <span id="year"></span> Infectaria</div>
   </footer>
 </main>
 
@@ -108,7 +110,6 @@
   </div>
 </div>
 
-<!-- SCRIPTS -->
 <script src="videosData.js"></script>
 <script src="search.js"></script>
 <script src="script.js"></script>
