@@ -1,44 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
+// video.js — single watch page logic (clean & final)
 
+document.addEventListener("DOMContentLoaded", () => {
   if (!window.VIDEOS) return;
 
-  /* =========================================
+  /* =============================
      GET VIDEO FROM URL
-  ========================================= */
+  ============================= */
   const params = new URLSearchParams(window.location.search);
   const titleParam = params.get("title");
 
-  let currentVideo = window.VIDEOS.find(
-    v => v.title === titleParam
-  );
+  let currentVideo = window.VIDEOS.find(v => v.title === titleParam);
 
-  // fallback → latest video
   if (!currentVideo) {
     currentVideo = [...window.VIDEOS]
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
   }
 
-  /* =========================================
+  /* =============================
      DOM ELEMENTS
-  ========================================= */
-  const titleEl    = document.getElementById("videoTitle");
-  const modelEl    = document.getElementById("videoModel");
-  const durationEl = document.getElementById("videoDuration");
-  const player     = document.getElementById("videoPlayer");
-  const overlay    = document.getElementById("upgradeOverlay");
+  ============================= */
+  const titleEl     = document.getElementById("videoTitle");
+  const modelEl     = document.getElementById("videoModel");
+  const durationEl  = document.getElementById("videoDuration");
+  const player      = document.getElementById("videoPlayer");
+  const overlay     = document.getElementById("upgradeOverlay");
   const relatedGrid = document.getElementById("relatedGrid");
 
-  /* =========================================
+  /* =============================
      FILL TEXT
-  ========================================= */
-  titleEl.textContent = currentVideo.title;
-  modelEl.textContent = currentVideo.model;
+  ============================= */
+  titleEl.textContent    = currentVideo.title;
+  modelEl.textContent    = currentVideo.model;
   durationEl.textContent = currentVideo.duration;
 
-  /* =========================================
-     PREMIUM LOGIC (TEMP – LOCALSTORAGE)
-     later Firebase se replace hoga
-  ========================================= */
+  /* =============================
+     PREMIUM LOGIC
+     (abhi localStorage, baad me Firebase)
+  ============================= */
   const IS_PREMIUM = localStorage.getItem("infectaria_premium") === "true";
   const PREVIEW_LIMIT = 30; // seconds
 
@@ -48,9 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   overlay.style.display = "none";
 
-  /* =========================================
-     PREVIEW LIMIT FOR FREE USERS
-  ========================================= */
   if (!IS_PREMIUM) {
     player.addEventListener("timeupdate", () => {
       if (player.currentTime >= PREVIEW_LIMIT) {
@@ -60,54 +55,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================================
-     RELATED VIDEOS
-     - hover autoplay
-     - muted
-     - mouse leave → reset
-  ========================================= */
+  /* =============================
+     RELATED VIDEOS (ONLY 3)
+     hover preview only here
+  ============================= */
   relatedGrid.innerHTML = "";
 
   const related = window.VIDEOS
     .filter(v => v.title !== currentVideo.title)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 6);
+    .slice(0, 3); // ✅ ONLY 3
 
   related.forEach(v => {
     const card = document.createElement("a");
     card.href = "video.html?title=" + encodeURIComponent(v.title);
     card.className = "related-card";
 
-    card.innerHTML = `
-      <video
-        muted
-        preload="metadata"
-        playsinline
-        poster="${v.thumb}"
-      >
-        <source src="${v.previewUrl}" type="video/mp4">
-      </video>
-      <p>${v.title}</p>
-    `;
+    const video = document.createElement("video");
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "metadata";
+    video.poster = v.thumb;
 
-    const vid = card.querySelector("video");
+    const src = document.createElement("source");
+    src.src = v.previewUrl;
+    src.type = "video/mp4";
+    video.appendChild(src);
+
+    const title = document.createElement("p");
+    title.textContent = v.title;
+
+    card.appendChild(video);
+    card.appendChild(title);
 
     // hover preview
     card.addEventListener("mouseenter", () => {
-      vid.currentTime = 0;
-      vid.play().catch(() => {});
+      video.currentTime = 0;
+      video.play().catch(() => {});
     });
 
     card.addEventListener("mouseleave", () => {
-      vid.pause();
-      vid.currentTime = 0;
+      video.pause();
+      video.currentTime = 0;
     });
 
     relatedGrid.appendChild(card);
   });
 
-  /* =========================================
+  /* =============================
      SECURITY
-  ========================================= */
+  ============================= */
   player.addEventListener("contextmenu", e => e.preventDefault());
 });
