@@ -12,27 +12,32 @@
   <div class="container">
     <div class="brand">Infectaria</div>
     <nav class="nav">
-  <a href="index.html">Home</a>
-  <a href="models.html">Models</a>
-  <a href="videos.html?category=Hentaied">Hentaied</a>
-  <a href="videos.html?category=Lesbian">Lesbian</a>
-  <a href="videos.html?category=All">All Sites</a>
-  <button id="searchBtn" class="icon">🔍</button>
-  <a href="login.html" class="login">Login</a>
-  <a href="profile.html" class="login">Account</a>
-  <a href="#" class="cta">Get Access</a>
-</nav>
+      <a href="index.html">Home</a>
+      <a href="models.html">Models</a>
+      <a href="videos.html?category=Hentaied">Hentaied</a>
+      <a href="videos.html?category=Lesbian">Lesbian</a>
+      <a href="videos.html?category=All">All Sites</a>
+      <button id="searchBtn" class="icon">🔍</button>
+      <a href="login.html" class="login">Login</a>
+      <a href="profile.html" class="login">Account</a>
+      <a href="#" class="cta">Get Access</a>
+    </nav>
   </div>
 </header>
 
-<main style="padding-top:90px;">
-  <section class="container">
-    <h1 id="pageTitle">All Videos</h1>
+<main style="padding-top:100px;">
+  <section class="container videos-page">
+
+    <h1 id="pageTitle">Videos</h1>
     <p id="pageSubtitle" class="models-subtitle"></p>
-    <div id="videosGrid" class="related-grid"></div>
+
+    <!-- ❗ GRID CLASS CHANGE HERE -->
+    <div id="videosGrid" class="videos-grid"></div>
+
   </section>
 </main>
 
+<!-- AGE GATE -->
 <div id="ageGate" class="agegate">
   <div class="agebox">
     <h3>18+ Warning</h3>
@@ -44,7 +49,7 @@
   </div>
 </div>
 
-<!-- Search Overlay -->
+<!-- SEARCH -->
 <div id="searchOverlay" class="search-overlay">
   <div class="search-inner">
     <div class="search-box">
@@ -59,11 +64,10 @@
     <div id="searchResults" class="search-results"></div>
   </div>
 </div>
-  
+
 <script src="videosData.js"></script>
 <script src="search.js"></script>
 <script src="script.js"></script>
 <script src="videos.js"></script>
 </body>
 </html>
-
