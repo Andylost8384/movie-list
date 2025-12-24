@@ -137,6 +137,13 @@ body {
   gap: 24px;
 }
 
+/* HOME PAGE – Latest videos 2 column grid */
+.latest-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
 @media(min-width:1024px) {
   .latest-grid {
     grid-template-columns: 7fr 5fr;
