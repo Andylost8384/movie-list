@@ -1,4 +1,4 @@
-// videos.js — category / model listing with hover preview
+// videos.js — category / model listing with hover preview (FINAL)
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!window.VIDEOS) return;
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!grid) return;
 
-  // grid ko home jaisa bana do
+  // ✅ 2 column grid (desktop)
   grid.classList.add("latest-2col");
 
   let list = [...window.VIDEOS];
@@ -22,17 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modelParam) {
     list = list.filter(v => v.model === modelParam);
-    pageTitle.textContent = modelParam + " Videos";
-    pageSub.textContent   = "All scenes featuring " + modelParam + ".";
+    if (pageTitle) pageTitle.textContent = modelParam + " Videos";
+    if (pageSub)   pageSub.textContent   = "All scenes featuring " + modelParam + ".";
   }
   else if (categoryParam && categoryParam !== "All") {
     list = list.filter(v => v.category === categoryParam);
-    pageTitle.textContent = categoryParam + " Videos";
-    pageSub.textContent   = "Showing all " + categoryParam + " videos.";
+    if (pageTitle) pageTitle.textContent = categoryParam + " Videos";
+    if (pageSub)   pageSub.textContent   = "Showing all " + categoryParam + " videos.";
   }
   else {
-    pageTitle.textContent = "All Videos";
-    pageSub.textContent   = "Showing all videos on Infectaria.";
+    if (pageTitle) pageTitle.textContent = "All Videos";
+    if (pageSub)   pageSub.textContent   = "Showing all videos on Infectaria.";
   }
 
   /* ================= SORT ================= */
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     card.href = "video.html?title=" + encodeURIComponent(video.title);
     card.className = "video-card";
 
-    /* Thumbnail */
+    /* Thumb */
     const img = document.createElement("img");
     img.src = video.thumb;
     img.alt = video.title;
