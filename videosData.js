@@ -76,7 +76,7 @@ window.VIDEOS = [
     category: "Lesbian",
     duration: "32:40",
     createdAt: "2023-02-09",
-    thumb: "https://ik.imagekit.io/uno5sox6q/Eve%20Sweet.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/213544550.jpg",
     previewUrl: "https://archive.org/download/yo-2-4k/Preview%20Yoga%202.mp4",
     fullUrl: "https://archive.org/download/yo-2-4k/2%201080p.mp4"
   }
