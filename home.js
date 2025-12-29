@@ -4,63 +4,58 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("latestGrid");
   if (!grid) return;
 
-  // IMPORTANT: grid ko 2-column layout ke liye mark karo
-  grid.classList.add("latest-2col");
-
   const latest = [...window.VIDEOS]
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 6);
+    .slice(0, 4); // 2x2 layout ke liye 4
 
   grid.innerHTML = "";
 
   latest.forEach(video => {
+    const item = document.createElement("div");
+    item.className = "video-item";
 
     const card = document.createElement("a");
     card.href = "video.html?title=" + encodeURIComponent(video.title);
-    card.className = "video-card";
+    card.className = "video-thumb";
 
-    /* ===== THUMB IMAGE ===== */
     const img = document.createElement("img");
     img.src = video.thumb;
     img.alt = video.title;
-    img.className = "video-thumb";
 
-    /* ===== PREVIEW VIDEO ===== */
-    const preview = document.createElement("video");
-    preview.className = "video-preview";
-    preview.muted = true;
-    preview.loop = true;
-    preview.playsInline = true;
-    preview.preload = "metadata";
+    card.appendChild(img);
 
-    const src = document.createElement("source");
-    src.src = video.previewUrl;
-    src.type = "video/mp4";
-    preview.appendChild(src);
+    // hover preview
+    if (video.previewUrl) {
+      const vid = document.createElement("video");
+      vid.src = video.previewUrl;
+      vid.muted = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.preload = "none";
+      vid.style.display = "none";
 
-    /* ===== TITLE ===== */
-    const title = document.createElement("div");
-    title.className = "video-card-title";
+      card.appendChild(vid);
+
+      card.addEventListener("mouseenter", () => {
+        img.style.display = "none";
+        vid.style.display = "block";
+        vid.currentTime = 0;
+        vid.play().catch(() => {});
+      });
+
+      card.addEventListener("mouseleave", () => {
+        vid.pause();
+        vid.style.display = "none";
+        img.style.display = "block";
+      });
+    }
+
+    const title = document.createElement("p");
+    title.className = "video-name";
     title.textContent = video.title;
 
-    /* ===== STRUCTURE ===== */
-    card.appendChild(img);
-    card.appendChild(preview);
-    card.appendChild(title);
-
-    /* ===== HOVER PREVIEW ===== */
-    card.addEventListener("mouseenter", () => {
-      img.style.opacity = "0";
-      preview.currentTime = 0;
-      preview.play().catch(() => {});
-    });
-
-    card.addEventListener("mouseleave", () => {
-      preview.pause();
-      preview.currentTime = 0;
-      img.style.opacity = "1";
-    });
-
-    grid.appendChild(card);
+    item.appendChild(card);
+    item.appendChild(title);
+    grid.appendChild(item);
   });
 });
