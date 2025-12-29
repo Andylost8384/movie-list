@@ -54,7 +54,7 @@ window.VIDEOS = [
     category: "Hentaied",
     duration: "20:02",
     createdAt: "2025-11-28",
-    thumb: "https://ik.imagekit.io/uno5sox6q/Lucy%20Mochi.jpg",
+    thumb: "https://ik.imagekit.io/uno5sox6q/In-The-Cocoon-.jpg",
     previewUrl: "https://archive.org/download/ending-3-1080p/PreviewCocoon.mp4",
     fullUrl: "https://archive.org/download/ending-3-1080p/Coon1080p.mp4"
   },
