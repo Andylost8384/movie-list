@@ -1140,3 +1140,60 @@ body {
     font-size: 14px;
   }
 }
+
+/* HOME PAGE – Latest videos grid */
+
+.home-latest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Mobile: 1 per row */
+@media (max-width: 768px) {
+  .home-latest-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.video-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+.video-thumb,
+.video-preview {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+/* Preview initially hidden */
+.video-preview {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover → preview visible */
+.video-card:hover .video-preview {
+  opacity: 1;
+}
+
+.video-card:hover .video-thumb {
+  opacity: 0;
+}
+
+/* Title below video */
+.video-card-title {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
