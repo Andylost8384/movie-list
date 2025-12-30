@@ -1197,3 +1197,18 @@ body {
   text-align: center;
 }
 
+/* VIDEO PAGE – Right side meta text */
+
+.video-meta {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.video-meta-item {
+  font-size: 17px;     /* thoda bada */
+  font-weight: 600;
+  color: #333;
+}
+
