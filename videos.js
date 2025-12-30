@@ -1,4 +1,4 @@
-// videos.js — category / model listing with hover preview (FINAL)
+// videos.js — category / model listing with hover preview (FINAL + FIXED)
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!window.VIDEOS) return;
@@ -13,10 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!grid) return;
 
-  // ✅ 2 column grid (desktop)
+  // ✅ 2 column grid
   grid.classList.add("latest-2col");
 
   let list = [...window.VIDEOS];
+
+  /* ================= HENTAIED SUB-CATEGORIES ================= */
+
+  const HENTAIED_SUB = [
+    "parasited",
+    "vampired",
+    "futanarixxx",
+    "freeze",
+    "plantsvscunts",
+    "monsterporn",
+    "vored",
+    "voodooed"
+  ];
 
   /* ================= FILTER ================= */
 
@@ -25,11 +38,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (pageTitle) pageTitle.textContent = modelParam + " Videos";
     if (pageSub)   pageSub.textContent   = "All scenes featuring " + modelParam + ".";
   }
+
   else if (categoryParam && categoryParam !== "All") {
-    list = list.filter(v => v.category === categoryParam);
+
+    if (categoryParam === "Hentaied") {
+      list = list.filter(v =>
+        v.category === "Hentaied" ||
+        HENTAIED_SUB.includes(v.category?.toLowerCase())
+      );
+    } else {
+      list = list.filter(v => v.category === categoryParam);
+    }
+
     if (pageTitle) pageTitle.textContent = categoryParam + " Videos";
     if (pageSub)   pageSub.textContent   = "Showing all " + categoryParam + " videos.";
   }
+
   else {
     if (pageTitle) pageTitle.textContent = "All Videos";
     if (pageSub)   pageSub.textContent   = "Showing all videos on Infectaria.";
@@ -54,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     card.href = "video.html?title=" + encodeURIComponent(video.title);
     card.className = "video-card";
 
-    /* Thumb */
+    /* Thumbnail */
     const img = document.createElement("img");
     img.src = video.thumb;
     img.alt = video.title;
@@ -68,12 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
     preview.playsInline = true;
     preview.preload = "metadata";
 
-    const src = document.createElement("source");
-    src.src = video.previewUrl;
-    src.type = "video/mp4";
-    preview.appendChild(src);
+    if (video.previewUrl) {
+      const src = document.createElement("source");
+      src.src = video.previewUrl;
+      src.type = "video/mp4";
+      preview.appendChild(src);
+    }
 
-    /* Title */
+    /* Title below video */
     const title = document.createElement("div");
     title.className = "video-card-title";
     title.textContent = video.title;
